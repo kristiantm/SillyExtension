@@ -18,10 +18,7 @@ eventSource.on(event_types.MESSAGE_SENT, handleOutGoingMessage);
 
 function handleOutGoingMessage(data) {
     // Handle message
-    toastr.info(
-        `You have sent the message: `,
-        message
-      );
+    alert('You have sent the message:');
 }
 
 
