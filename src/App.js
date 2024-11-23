@@ -1,6 +1,6 @@
 // Define the asynchronous import function
 async function importFromScript(what) {
-    const module = await import(/* webpackIgnore: true */ '../../../../../script.js'); // Adjust path as needed
+    const module = await import(/* webpackIgnore: true */ '~/SillyTavern/public/script.js'); // Adjust path as needed
     return module[what];
 }
 
@@ -9,6 +9,8 @@ async function importFromScript(what) {
     // Import required modules dynamically
     const eventSource = await importFromScript('eventSource');
     const event_types = await importFromScript('event_types');
+    const sendMessageAsUser = await importFromScript('sendMessageAsUser');
+
 
     // Attach the event listener for user messages
     eventSource.on(event_types.MESSAGE_RECEIVED, handleIncomingMessage);
@@ -30,9 +32,9 @@ async function importFromScript(what) {
 
         // Check for a specific keyword or condition in the user's message
         const userMessage = data.message;
-        
+        console.log(`Triggering a response.`);
         // Send a /trigger command
-        eventSource.sendUserCommand("/trigger Debate moderator");
+        sendMessageAsUser("/trigger Debate moderator", "");
         //triggerCharacterResponse("Debate moderator");
         
     }
