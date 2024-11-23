@@ -12,7 +12,7 @@ async function importFromScript(what) {
 
     // Attach the event listener for user messages
     eventSource.on(event_types.MESSAGE_RECEIVED, handleIncomingMessage);
-
+    
     // Simulate sending a user command
     function sendUserCommand(command) {
         console.log(`Simulating user command: ${command}`);
@@ -32,7 +32,7 @@ async function importFromScript(what) {
         const userMessage = data.message;
         
         // Send a /trigger command
-        sendUserCommand("/trigger Debate moderator");
+        eventSource.sendUserCommand("/trigger Debate moderator");
         //triggerCharacterResponse("Debate moderator");
         
     }
