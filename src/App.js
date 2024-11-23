@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 
 // Define the asynchronous import function
 async function importFromScript(what) {
-    const module = await import(/* webpackIgnore: true */ '../../../script.js');
+    const module = await import(/* webpackIgnore: true */ '~/SillyTavern/public/script.js');
     return module[what];
 }
 
