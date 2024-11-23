@@ -1,7 +1,21 @@
 /* global SillyTavern */
 import React, { useEffect } from 'react';
 
+import { eventSource, event_types } from "../../../script.js";
+
+eventSource.on(event_types.MESSAGE_SENT, handleOutGoingMessage);
+
+function handleOutGoingMessage(data) {
+    // Handle message
+    toastr.info(
+        `You have sent the message: `,
+        message
+      );
+}
+
+
 function App() {
+
     useEffect(() => {
         // Event listener for user input submission
         const handleUserSubmit = (message) => {
