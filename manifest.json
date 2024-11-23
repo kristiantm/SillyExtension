@@ -3,7 +3,7 @@
     "loading_order": 1,
     "requires": [],
     "optional": [],
-    "js": "dist/index.js",
+    "js": "source/index.js",
     "css": "",
     "author": "KrsistianTM",
     "version": "0.1.0",
