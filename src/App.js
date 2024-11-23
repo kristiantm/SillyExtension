@@ -13,18 +13,32 @@ async function importFromScript(what) {
     // Attach the event listener for user messages
     eventSource.on(event_types.MESSAGE_RECEIVED, handleIncomingMessage);
 
+    // Simulate sending a user command
+    function sendUserCommand(command) {
+        console.log(`Simulating user command: ${command}`);
+
+        // Emit the event to send the command
+        eventSource.emit(event_types.MESSAGE_RECEIVED, {
+            message: command, // Command to send
+            sender: "user",   // Simulate the user as the sender
+        });
+    }
+
     // Handler function for when a user sends a message
     function handleIncomingMessage(data) {
         console.log("User sent a message:", data);
 
         // Check for a specific keyword or condition in the user's message
         const userMessage = data.message;
-        triggerCharacterResponse("Debate moderator");
+        
+        // Send a /trigger command
+        sendUserCommand("/trigger Debate moderator");
+        //triggerCharacterResponse("Debate moderator");
         
     }
 
     // Function to trigger a character to generate a response
-    function triggerCharacterResponse(characterName) {
+    /*function triggerCharacterResponse(characterName) {
         console.log(`Triggering ${characterName} to generate a response.`);
 
         // Assuming the system has an event for prompting a character's response
@@ -32,7 +46,9 @@ async function importFromScript(what) {
         eventSource.emit(characterGenerateResponseEvent, {
             character: characterName,
         });
-    }
+    }*/
+
+    
 })();
 
 function App() {
@@ -41,7 +57,7 @@ function App() {
 
     // Example button click event for testing purposes
     function handleClick() {
-        alert(`Hello, ${SillyTavern.getContext().name1}!`);
+        alert(`Hello, ${SillyTavern.getContext().characters}!`);
     }
 
     return (
