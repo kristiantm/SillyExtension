@@ -1,26 +1,39 @@
-/* global SillyTavern */
-import React, { useEffect } from 'react';
-
-
 // Define the asynchronous import function
 async function importFromScript(what) {
-    const module = await import(/* webpackIgnore: true */ '~/SillyTavern/public/script.js');
+    const module = await import(/* webpackIgnore: true */ '../../../../../script.js'); // Adjust path as needed
     return module[what];
 }
 
-// Import the required items from script.js
-const eventSource = await importFromScript('eventSource');
-const event_types = await importFromScript('event_types');
+// Main function to handle the event and trigger character response
+(async function setupMessageListener() {
+    // Import required modules dynamically
+    const eventSource = await importFromScript('eventSource');
+    const event_types = await importFromScript('event_types');
 
-//import { eventSource, event_types } from "../../../script.js";
+    // Attach the event listener for user messages
+    eventSource.on(event_types.MESSAGE_RECEIVED, handleIncomingMessage);
 
-eventSource.on(event_types.MESSAGE_SENT, handleOutGoingMessage);
+    // Handler function for when a user sends a message
+    function handleIncomingMessage(data) {
+        console.log("User sent a message:", data);
 
-function handleOutGoingMessage(data) {
-    // Handle message
-    alert('You have sent the message:');
-}
+        // Check for a specific keyword or condition in the user's message
+        const userMessage = data.message;
+        triggerCharacterResponse("Debate moderator");
+        
+    }
 
+    // Function to trigger a character to generate a response
+    function triggerCharacterResponse(characterName) {
+        console.log(`Triggering ${characterName} to generate a response.`);
+
+        // Assuming the system has an event for prompting a character's response
+        const characterGenerateResponseEvent = event_types.CHARACTER_GENERATE_RESPONSE; // Adjust if needed
+        eventSource.emit(characterGenerateResponseEvent, {
+            character: characterName,
+        });
+    }
+})();
 
 function App() {
 
