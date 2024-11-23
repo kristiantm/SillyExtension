@@ -34,7 +34,7 @@ async function importFromScript(what) {
         const userMessage = data.message;
         console.log(`Triggering a response.`);
         // Send a /trigger command
-        sendMessageAsUser("/trigger Debate moderator", "");
+        sendMessageAsUser("/trigger await=false Debate moderator", "");
         //triggerCharacterResponse("Debate moderator");
         
     }
