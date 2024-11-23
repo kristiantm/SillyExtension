@@ -1,7 +1,18 @@
 /* global SillyTavern */
 import React, { useEffect } from 'react';
 
-import { eventSource, event_types } from "../../../script.js";
+
+// Define the asynchronous import function
+async function importFromScript(what) {
+    const module = await import(/* webpackIgnore: true */ '../../../script.js');
+    return module[what];
+}
+
+// Import the required items from script.js
+const eventSource = await importFromScript('eventSource');
+const event_types = await importFromScript('event_types');
+
+//import { eventSource, event_types } from "../../../script.js";
 
 eventSource.on(event_types.MESSAGE_SENT, handleOutGoingMessage);
 
