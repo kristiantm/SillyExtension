@@ -17,13 +17,26 @@ async function importFromScript(what) {
     
     // Simulate sending a user command
     function sendUserCommand(command) {
-        console.log(`Simulating user command: ${command}`);
+        console.log('Simulating user command: ${command}');
 
+
+        const textArea = document.getElementById('send_textarea');
+        if (!textArea || !(textArea instanceof HTMLTextAreaElement)) {
+            console.log('Cannot find textArea');
+            return;
+        }
+        const characterName = "Debate moderator";
+        textArea.value = `/trigger name="${characterName}"`;
+        textArea.focus();
+    
+
+        /*
         // Emit the event to send the command
         eventSource.emit(event_types.MESSAGE_RECEIVED, {
             message: command, // Command to send
             sender: "user",   // Simulate the user as the sender
         });
+        */
     }
 
     // Handler function for when a user sends a message
@@ -32,9 +45,9 @@ async function importFromScript(what) {
 
         // Check for a specific keyword or condition in the user's message
         const userMessage = data.message;
-        console.log(`Triggering a response.`);
+        console.log('Triggering a response.');
         // Send a /trigger command
-        sendMessageAsUser("/trigger await=false Debate moderator", "");
+        sendMessageAsUser('/trigger await=false "Debate moderator"', "");
         //triggerCharacterResponse("Debate moderator");
         
     }
