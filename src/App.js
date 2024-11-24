@@ -19,7 +19,7 @@ async function importFromScript(what) {
     function sendUserCommand(command) {
         console.log('Simulating user command: ${command}');
 
-
+        /*
         const textArea = document.getElementById('send_textarea');
         if (!textArea || !(textArea instanceof HTMLTextAreaElement)) {
             console.log('Cannot find textArea');
@@ -28,15 +28,15 @@ async function importFromScript(what) {
         const characterName = "Debate moderator";
         textArea.value = `/trigger ${characterName}`;
         textArea.focus();
-    
+        */
 
-        /*
+        
         // Emit the event to send the command
         eventSource.emit(event_types.MESSAGE_RECEIVED, {
             message: command, // Command to send
             sender: "user",   // Simulate the user as the sender
         });
-        */
+        
     }
 
     // Handler function for when a user sends a message
@@ -49,7 +49,7 @@ async function importFromScript(what) {
         // Send a /trigger command
         //sendMessageAsUser('/trigger await=false "Debate moderator"', "");
         //triggerCharacterResponse("Debate moderator");
-        sendUserCommand("trigger");
+        sendUserCommand("/trigger Debate moderator");
         
     }
 
