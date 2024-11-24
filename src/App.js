@@ -1,6 +1,6 @@
 // Define the asynchronous import function
 async function importFromScript(what) {
-    const module = await import(/* webpackIgnore: true */ '../../../../script.js'); // Adjust path as needed
+    const module = await import(/* webpackIgnore: true */ '../../../../../script.js'); // Adjust path as needed
     return module[what];
 }
 
